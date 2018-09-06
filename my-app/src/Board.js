@@ -5,30 +5,33 @@ class Board extends Component {
     renderSquare(i) {
         return (
             <Square
-                key={'j'+i}                
+                key={i}                
                 value={this.props.squares[i]}
                 onClick={() => this.props.onClick(i)}
             />
         );
     }
 
-    renderSquares() {
+    renderSquares(row) {
         let squares = [];
-        for (let j = 0; j < 3; j++) {
-            squares.push(this.renderSquare(j));
-        }
+        const squareNumbers = [1, 2, 3];
+        squareNumbers.map((number) =>
+            squares.push(this.renderSquare(row+number))
+        );
         return squares;
     }
 
     createBoard() {
         let board = [];
-        for (let i = 0; i < 3; i++) {
+        const rows = ['a', 'b', 'c'];
+        rows.map((row) =>
             board.push(
-                <div key={i} className="board-row">
-                    {this.renderSquares()}
+                <div key={row} className="board-row">
+                    {this.renderSquares(row)}
                 </div>
-            );
-        }
+            )
+        );
+       
         return board;
     }
 
